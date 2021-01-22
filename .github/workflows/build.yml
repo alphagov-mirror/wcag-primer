@@ -4,6 +4,7 @@ on:
 - push
 
 jobs:
+  # A really basic check to see if this builds okay.
   build:
     runs-on: ubuntu-latest
     if: github.ref != 'refs/heads/main' || github.ref != 'refs/heads/master'
@@ -14,6 +15,7 @@ jobs:
         bundler-cache: true
     - run: bundle install
     - run: bundle exec middleman build --clean
+
   deploy:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
