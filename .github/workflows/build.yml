@@ -5,7 +5,7 @@ on:
 
 jobs:
   # A really basic check to see if this builds okay.
-  build:
+  only-build:
     runs-on: ubuntu-latest
     if: github.ref != 'refs/heads/main' || github.ref != 'refs/heads/master'
     steps:
@@ -16,7 +16,7 @@ jobs:
     - run: bundle install
     - run: bundle exec middleman build --clean
 
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
     steps:
@@ -25,4 +25,4 @@ jobs:
       with:
         bundler-cache: true
     - run: bundle install
-    # - run: bundle exec rake publish
+    - run: bundle exec rake publish
